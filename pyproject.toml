@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "dasdasd"
+version = "0.1.0"
+description = ""
+authors = ["Pedro Rodrigues <pedrorodriguesgfx@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+spotipy = "^2.20.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

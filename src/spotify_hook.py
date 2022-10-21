@@ -1,9 +1,11 @@
+import sys
+import pprint
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.oauth2 import SpotifyClientCredentials,SpotifyOAuth
 
 #don't hardcode your secrets in open projects
 cid = ""
-secret = "" 
+secret = ""
 
 
 #Authentication - without user
@@ -16,3 +18,16 @@ URI_TEST = "https://open.spotify.com/playlist/37i9dQZEVXbNG2KDcFcKOF?si=77d8f5cd
 results = sp.search(q='Metallica', limit=20)
 for idx, track in enumerate(results['tracks']['items']):
     print(idx, track['name'])
+
+playlist_URI = URI_TEST.split("/")[-1].split("?")[0]
+track_uris = [x["track"]["uri"] for x in sp.playlist_tracks(playlist_URI)["items"]]
+
+birdy_uri = 'spotify:artist:77SW9BnxLY8rJ0RciFqkHh' #the neighbourhood
+results = sp.artist_albums(birdy_uri, album_type='single')
+albums = results['items']
+while results['next']:
+    results = sp.next(results)
+    albums.extend(results['items'])
+
+for album in albums:
+    print(album['name'])
